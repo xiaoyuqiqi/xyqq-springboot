@@ -1,0 +1,11 @@
+# 服务端口和服务访问名称
+server:
+  port: 8082
+  servlet:
+    context-path: /xyqq-security-oauth2
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:public-key.text
