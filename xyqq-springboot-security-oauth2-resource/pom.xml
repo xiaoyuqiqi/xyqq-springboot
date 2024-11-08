@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.xyqq</groupId>
-    <artifactId>xyqq-security-oauth2-resource</artifactId>
+    <artifactId>xyqq-springboot-security-oauth2-resource</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>xyqq-security-oauth2-resource</name>
     <description>xyqq-security-oauth2-resource</description>
@@ -13,6 +13,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring-boot.version>2.6.13</spring-boot.version>
     </properties>
+
+    <parent>
+        <artifactId>xyqq-springboot</artifactId>
+        <groupId>com.xyqq</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
