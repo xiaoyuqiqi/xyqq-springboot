@@ -5,8 +5,8 @@
     <groupId>com.xyqq</groupId>
     <artifactId>xyqq-springboot-security-oauth2-resource</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>xyqq-security-oauth2-resource</name>
-    <description>xyqq-security-oauth2-resource</description>
+    <name>xyqq-springboot-security-oauth2-resource</name>
+    <description>xyqq-springboot-security-oauth2-resource</description>
     <properties>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

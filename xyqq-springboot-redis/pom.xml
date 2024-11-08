@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xyqq-springboot-helloworld</artifactId>
+    <artifactId>xyqq-springboot-redis</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>xyqq-springboot-helloworld</name>
+    <name>xyqq-springboot-redis</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -38,10 +38,12 @@
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
 		</dependency>
+
+
 	</dependencies>
 
     <build>
-        <finalName>xyqq-helloworld</finalName>
+        <finalName>xyqq-springboot-redis</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

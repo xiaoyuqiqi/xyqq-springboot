@@ -12,6 +12,7 @@
     <module>xyqq-springboot-standard</module>
     <module>xyqq-springboot-security-oauth2-resource</module>
     <module>xyqq-springboot-mybatis-plus</module>
+    <module>xyqq-springboot-redis</module>
   </modules>
   <packaging>pom</packaging>
 
