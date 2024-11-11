@@ -16,21 +16,22 @@
 
 package com.xyqq.controller;
 
+import com.xyqq.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
  */
-@Controller
-public class BasicController {
+@RestController
+public class UserController {
 
-    @RequestMapping("/hello")
-    @ResponseBody
-    public String hello(@RequestParam(name = "name", defaultValue = "unknown user") String name) {
-        return "Hello " + name;
+    @Autowired
+    private UserService userService;
+    @GetMapping("/user/{id}")
+    public String hello(@PathVariable(name = "id") String id) {
+        return userService.getUserById(id);
     }
 
 }

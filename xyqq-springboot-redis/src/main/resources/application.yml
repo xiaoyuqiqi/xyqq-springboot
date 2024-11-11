@@ -1,4 +1,13 @@
 server:
   port: 8080
   servlet:
-    context-path: /demo
+    context-path: /xyqq-springboot-redis
+
+
+spring:
+  redis:
+    host: 192.168.1.233       # Redis 服务地址
+    port: 6379            # Redis 端口
+    database: 0
+    password: xyqq            # 如果有密码，请在这里填入
+    timeout: 500000         # 超时时间（单位：毫秒）
