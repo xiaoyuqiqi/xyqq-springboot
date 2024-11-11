@@ -2,6 +2,9 @@ package com.xyqq.service;
 
 import java.util.Set;
 
+/**
+ * @author xyqq
+ */
 public interface UserService {
 
     String getUserById(String id);
