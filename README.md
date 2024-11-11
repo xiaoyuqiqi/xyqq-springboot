@@ -1,2 +1,2 @@
 # xyqq-springboot
-springboot集成demo
+springboot集成demo，注意侧重于springboot集成第三方框架的实战，不涉及业务代码
