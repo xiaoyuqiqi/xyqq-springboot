@@ -11,7 +11,7 @@ contextLoads() 方法：这是一个简单的无操作测试方法。Spring Boot
 这种简单的“上下文加载测试”通常是项目中的第一个测试，可以在项目开发初期就运行，确保基础配置和依赖项设置正确。
 */
 @SpringBootTest
-class XyqqSpringbootRedisApplicationTests {
+public class XyqqSpringbootRedisApplicationTests {
 
     @Test
     void contextLoads() {

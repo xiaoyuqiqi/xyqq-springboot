@@ -17,21 +17,20 @@
 package com.xyqq.controller;
 
 import com.xyqq.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
- */
+@RequiredArgsConstructor
 @RestController
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
     @GetMapping("/user/{id}")
     public String hello(@PathVariable(name = "id") String id) {
-        return userService.getUserById(id);
+        return userService.getStrByKey(id);
     }
 
 }

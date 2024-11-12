@@ -8,30 +8,33 @@ import org.springframework.util.StringUtils;
 
 import java.util.Set;
 
+import static com.xyqq.consts.RedisKeyConst.*;
+
 /**
  * @author xyqq
  */
 @Service
-public class UserServiceImpl  implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
-    @Override
-    public String getUserById(String id) {
 
-        String user = (String) redisTemplate.opsForValue().get("User_" + id);
-        StringUtils.isEmpty(user);
-        if (StringUtils.isEmpty(user)){
+    @Override
+    public String getStrByKey(String key) {
+
+        String str1 = (String) redisTemplate.opsForValue().get(USER_STRING + key);
+        StringUtils.isEmpty(str1);
+        if (StringUtils.isEmpty(str1)) {
             //模拟从数据库中获取数据
-            user = "User_" + id;
+            str1 = USER_STRING + key;
             //将数据存入redis中
-            redisTemplate.opsForValue().set("User_" + id,user);
+            redisTemplate.opsForValue().set(USER_STRING + key, str1);
 
             // 可以设置缓存的有效期 redisTemplate.opsForValue().set("User_" + id, user, Duration.ofMinutes(30));，避免缓存长期占用内存
 
         }
 
-        return "User_" + id;
+        return str1;
     }
 
 
@@ -51,7 +54,7 @@ public class UserServiceImpl  implements UserService {
     @Override
     public void saveUserHash(String id, String field, String value) {
         HashOperations<String, Object, Object> hashOps = redisTemplate.opsForHash();
-        hashOps.put("User_Hash_" + id, field, value);
+        hashOps.put(USER_HASH + id, field, value);
     }
 
     /**
@@ -60,7 +63,7 @@ public class UserServiceImpl  implements UserService {
     @Override
     public Object getUserHash(String id, String field) {
         HashOperations<String, Object, Object> hashOps = redisTemplate.opsForHash();
-        return hashOps.get("User_Hash_" + id, field);
+        return hashOps.get(USER_HASH + id, field);
     }
 
 
@@ -70,7 +73,7 @@ public class UserServiceImpl  implements UserService {
     @Override
     public void saveUserList(String key, String value) {
         ListOperations<String, Object> listOps = redisTemplate.opsForList();
-        listOps.rightPush("User_List_" + key, value);
+        listOps.rightPush(USER_LIST + key, value);
     }
 
     /**
@@ -79,7 +82,7 @@ public class UserServiceImpl  implements UserService {
     @Override
     public Object getUserList(String key, long index) {
         ListOperations<String, Object> listOps = redisTemplate.opsForList();
-        return listOps.index("User_List_" + key, index);
+        return listOps.index(USER_LIST + key, index);
     }
 
     /**
@@ -88,7 +91,7 @@ public class UserServiceImpl  implements UserService {
     @Override
     public void saveUserSet(String key, String value) {
         SetOperations<String, Object> setOps = redisTemplate.opsForSet();
-        setOps.add("User_Set_" + key, value);
+        setOps.add(USER_SET + key, value);
     }
 
     /**
@@ -97,7 +100,7 @@ public class UserServiceImpl  implements UserService {
     @Override
     public Set<Object> getUserSet(String key) {
         SetOperations<String, Object> setOps = redisTemplate.opsForSet();
-        return setOps.members("User_Set_" + key);
+        return setOps.members(USER_SET + key);
     }
 
 
@@ -107,7 +110,7 @@ public class UserServiceImpl  implements UserService {
     @Override
     public void saveUserZSet(String key, String value, double score) {
         ZSetOperations<String, Object> zSetOps = redisTemplate.opsForZSet();
-        zSetOps.add("User_ZSet_" + key, value, score);
+        zSetOps.add(USER_ZSET + key, value, score);
     }
 
     /**
@@ -116,6 +119,6 @@ public class UserServiceImpl  implements UserService {
     @Override
     public Set<Object> getUserZSet(String key, double min, double max) {
         ZSetOperations<String, Object> zSetOps = redisTemplate.opsForZSet();
-        return zSetOps.rangeByScore("User_ZSet_" + key, min, max);
+        return zSetOps.rangeByScore(USER_ZSET + key, min, max);
     }
 }

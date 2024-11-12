@@ -1,28 +1,33 @@
 package com.xyqq.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.xyqq.XyqqSpringbootRedisApplicationTests;
+import com.xyqq.model.User;
 import com.xyqq.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Set;
 
-@SpringBootTest
-class UserServiceImplTest {
+class UserServiceImplTest extends XyqqSpringbootRedisApplicationTests {
 
     @Autowired
     private UserService userService;
 
     @Test
-    void getUserById() {
+    void getStrByKey() {
 
-        System.out.println(userService.getUserById("1"));
+        System.out.println(userService.getStrByKey("1"));
 
     }
 
     @Test
     void saveUserHash() {
+        userService.saveUserHash("1", "id", "1");
         userService.saveUserHash("1", "name", "zhangsan");
+
+        userService.saveUserHash("2", "id", "2");
+        userService.saveUserHash("2", "name", "lisi");
     }
 
     @Test
@@ -32,22 +37,33 @@ class UserServiceImplTest {
 
     @Test
     void saveUserList() {
-        userService.saveUserList("User_List_1", "hello world");
+        User user1 = new User(1L, "zhangsan");
+        User user2 = new User(2L, "lisi");
+
+        // Redis 中的 List 数据结构本身存储的是字符串值
+
+        // 把 User 对象转换为 JSON字符串
+        String user1Str = JSONObject.toJSONString(user1);
+        String user2Str = JSONObject.toJSONString(user2);
+
+
+        userService.saveUserList("1", user1Str);
+        userService.saveUserList("1", user2Str);
     }
 
     @Test
     void getUserList() {
-        System.out.println(userService.getUserList("User_List_1", 0));
+        System.out.println(userService.getUserList("1", 0));
     }
 
     @Test
     void saveUserSet() {
-        userService.saveUserSet("User_Set_1", "hello world");
+        userService.saveUserSet("1", "hello world");
     }
 
     @Test
     void getUserSet() {
-        System.out.println(userService.getUserSet("User_Set_1"));
+        System.out.println(userService.getUserSet("1"));
     }
 
     @Test
