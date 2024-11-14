@@ -19,12 +19,12 @@
 
 ### 4. 示例
 - **用户信息**：`user:profile:id:12345`
-- **订单状态**：`order:status:orderid:98765`
-- **商品库存**：`product:inventory:itemid:112233`
+- **订单状态**：`order:status:order_id:98765`
+- **商品库存**：`product:inventory:item_id:112233`
 
 ### 5. 特殊数据类型的约定
 如果需要存储一些特定的数据类型，建议在业务描述后添加类型前缀，如 `list`、`set`、`hash`：
-- 列表（List）：`chat:messages:list:roomid:67890`
+- 列表（List）：`chat:messages:list:room_id:67890`
 - 哈希（Hash）：`user:profile:hash:id:12345`
 - 集合（Set）：`product:categories:set`
 
@@ -46,10 +46,54 @@ public class RedisKeyUtil {
     }
 
     public static String orderStatusKey(String orderId) {
-        return String.format("order:status:orderid:%s", orderId);
+        return String.format("order:status:order_id:%s", orderId);
     }
 }
 ```
 
 ### 总结
 遵循以上规范将有助于Redis数据的有序管理、数据查找及维护，同时提高开发效率。
+
+为什么不选用驼峰命名方式
+
+在 Redis 键名的命名规范中，是否使用驼峰（camelCase）与小写（snake_case）有不同的考量。这里总结了一些优缺点，帮助你做出选择：
+
+### 1. 小写（snake_case）命名方式
+
+#### 优点：
+- **可读性高**：小写字母与冒号分隔符（`:`）结合，通常更容易阅读。对于使用 Redis 的团队，尤其是在查找键名时，通常会觉得小写更加清晰直观。
+- **符合 Redis 社区惯例**：许多 Redis 实践和教程中推荐使用小写和下划线分隔符，因其简洁且易于理解。你可能会发现很多开源项目遵循这一约定。
+- **避免大小写问题**：不同操作系统（如 Linux 和 Windows）对大小写的处理不同，使用小写可以避免潜在的错误。
+
+#### 示例：
+```bash
+user:profile:id:12345
+order:status:order_id:98765
+```
+
+### 2. 驼峰（camelCase）命名方式
+
+#### 优点：
+- **与代码一致**：如果你使用 Java 或其他面向对象语言，通常使用驼峰命名方式作为标准，使用驼峰命名的 Redis 键可能和代码风格更加一致。
+- **避免下划线的过度使用**：有时在某些项目中可能更倾向于避免使用下划线，尤其是在面向 JavaScript、Java 或其他语言的项目中，驼峰命名能够在代码中保持一致性。
+
+#### 缺点：
+- **不太适合阅读**：由于 Redis 键名一般都是由多个单词组成，使用驼峰命名时，单词之间的界限不如下划线明显，这可能会影响键名的可读性，尤其是在大型系统中。
+- **操作系统兼容性**：在某些操作系统或工具中，大小写的处理可能存在问题，可能导致操作上的不便。
+
+#### 示例：
+```bash
+userProfileId12345
+orderStatusOrderid98765
+```
+
+### 3. 总结
+
+- **建议使用小写 + 冒号分隔符（snake_case）**：这是 Redis 的常见约定方式，也有助于提高可读性和一致性，尤其是当键名较长或包含多个单词时。
+- **使用驼峰（camelCase）** 可以作为一种风格，但如果系统的命名方式本身偏向于小写字母，驼峰命名可能会影响键名的易读性。
+
+### 结论：
+- 如果你是为了更好地与 Redis 的常见做法保持一致，建议使用 **小写 + 冒号分隔符**（`snake_case`）。
+- 如果你的团队有明确的编程规范或偏好，并且对一致性有更高的要求，使用 **驼峰命名（camelCase）** 也可以，但需要考虑键名的可读性和团队的整体约定。
+
+在大多数情况下，**小写字母和冒号分隔符** 会更符合 Redis 和大多数开发者的习惯，通常推荐使用这种方式。
