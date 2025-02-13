@@ -15,10 +15,12 @@
     <module>xyqq-springboot-redis</module>
     <module>xyqq-springboot-redis-jedis</module>
     <module>xyqq-springboot-redis-redisson</module>
+	<module>xyqq-springboot-socket</module>
   </modules>
   <packaging>pom</packaging>
 
   <name>xyqq-springboot</name>
+  <description>聚合服务</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
