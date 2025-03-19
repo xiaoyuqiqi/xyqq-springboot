@@ -1,16 +1,42 @@
 package com.xyqq.csv.controller;
 
+import com.xyqq.csv.model.User;
 import com.xyqq.csv.utils.CsvUtil;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequestMapping("/csv")
 public class CsvController {
+
+
+//    private static final String UPLOAD_DIR = "/tmp/"; // Linux/macOS 目录
+    // private static final String UPLOAD_DIR = "C:/temp/"; // Windows 目录
+    private static final String UPLOAD_DIR = "C:/Users/10298/Desktop/csv/";
+
+    @PostMapping("/upload")
+    public List<User> uploadCsv(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            throw new RuntimeException("上传的文件为空");
+        }
+
+        // 保存文件到本地
+        String filePath = UPLOAD_DIR + file.getOriginalFilename();
+        File dest = new File(filePath);
+        try {
+            file.transferTo(dest);
+        } catch (IOException e) {
+            throw new RuntimeException("文件保存失败：" + e.getMessage(), e);
+        }
+
+        // 解析 CSV
+        return CsvUtil.readCsv(filePath);
+    }
 
     @GetMapping("/generate")
     public String generateCsv() {
@@ -36,6 +62,16 @@ public class CsvController {
 
     public static void main(String[] args) {
         CsvController csvController = new CsvController();
-        csvController.generateCsv();
+
+        // 导出
+//        csvController.generateCsv();
+
+        String filePath = "C:/Users/10298/Desktop/csv/output.csv";
+        // 读取
+        List<User> users = CsvUtil.readCsv(filePath);
+        for (User user : users) {
+            System.out.println(user);
+        }
+
     }
 }

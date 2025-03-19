@@ -1,9 +1,11 @@
 package com.xyqq.csv.utils;
 
 import com.opencsv.CSVWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.xyqq.csv.model.User;
+
+import java.io.*;
 import java.util.List;
 
 public class CsvUtil {
@@ -24,6 +26,24 @@ public class CsvUtil {
             }
         } catch (IOException e) {
             throw new RuntimeException("写入 CSV 失败：" + e.getMessage(), e);
+        }
+    }
+
+
+    /**
+     * 解析 CSV 文件并转换为 User 对象列表
+     * @param filePath CSV 文件路径
+     * @return 用户列表
+     */
+    public static List<User> readCsv(String filePath) {
+        try (Reader reader = new FileReader(filePath)) {
+            CsvToBean<User> csvToBean = new CsvToBeanBuilder<User>(reader)
+                    .withType(User.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+            return csvToBean.parse();
+        } catch (IOException e) {
+            throw new RuntimeException("读取 CSV 失败：" + e.getMessage(), e);
         }
     }
 }
