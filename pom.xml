@@ -16,6 +16,7 @@
     <module>xyqq-springboot-redis-jedis</module>
     <module>xyqq-springboot-redis-redisson</module>
 	<module>xyqq-springboot-socket</module>
+    <module>xyqq-springboot-csv</module>
   </modules>
   <packaging>pom</packaging>
 

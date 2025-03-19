@@ -1,4 +1,4 @@
-package com.xyqq.socket.config;
+package com.xyqq.csv.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
