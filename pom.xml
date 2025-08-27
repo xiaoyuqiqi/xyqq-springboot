@@ -17,6 +17,7 @@
     <module>xyqq-springboot-redis-redisson</module>
 	<module>xyqq-springboot-socket</module>
     <module>xyqq-springboot-csv</module>
+    <module>xyqq-springboot-kafka-stream</module>
   </modules>
   <packaging>pom</packaging>
 
