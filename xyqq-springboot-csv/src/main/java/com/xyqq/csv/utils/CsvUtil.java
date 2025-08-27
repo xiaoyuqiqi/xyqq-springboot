@@ -1,4 +1,4 @@
-package com.xyqq.kafka.stream.utils;
+package com.xyqq.csv.utils;
 
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;

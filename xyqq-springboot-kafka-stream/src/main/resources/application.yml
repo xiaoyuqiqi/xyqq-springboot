@@ -1,4 +1,31 @@
 server:
   port: 8080
   servlet:
-    context-path: /csv
+    context-path: /kafka-stream
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: kafka-stream-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    streams:
+      application-id: kafka-stream-app
+      bootstrap-servers: localhost:9092
+      default-key-serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      default-value-serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+      properties:
+        processing.guarantee: exactly_once
+        commit.interval.ms: 1000
+
+# Kafka Topics 配置
+kafka:
+  topics:
+    input: input-topic
+    output: output-topic
+    user-events: user-events-topic

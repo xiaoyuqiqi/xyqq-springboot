@@ -1,4 +1,4 @@
-package com.xyqq.kafka.stream.model;
+package com.xyqq.csv.model;
 
 import com.opencsv.bean.CsvBindByName;
 

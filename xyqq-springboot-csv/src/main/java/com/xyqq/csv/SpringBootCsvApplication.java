@@ -1,4 +1,4 @@
-package com.xyqq.kafka.stream;
+package com.xyqq.csv;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
